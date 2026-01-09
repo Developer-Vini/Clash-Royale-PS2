@@ -14,7 +14,6 @@ const globin = Assets.image('personagens/goblin/globin_walk.png', {
 
 const background = Assets.image("background.png");
 
-
 while (true) {
     Screen.clear();
     background.draw(0, 0);

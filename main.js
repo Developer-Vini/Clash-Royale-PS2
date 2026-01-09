@@ -1,5 +1,5 @@
-import { Carta } from "./src/carta.js";
-import { Torre } from "./src/torre.js";
+import Card from "./src/card.js";
+import Tower from "./src/tower.js";
 import Gamepad from "./src/shared/gamepad.js";
 import { CARD_TYPE, TOWER_TYPE } from "./src/shared/constants.js";
 import Assets from "./src/shared/assets.js";
@@ -9,33 +9,33 @@ Screen.setParam(Screen.DEPTH_TEST_ENABLE, false);
 const background = Assets.image("background.png");
 
 const cards = [
-  new Carta("Fire", 4, CARD_TYPE.FEITICO, Assets.image("/Cartas/fire.png")),
-  new Carta("Esqueleto", 1, CARD_TYPE.TROPA, Assets.image("/Cartas/esqueleto.png"))
+  new Card("Fire", 4, CARD_TYPE.SPELL, Assets.image("/Cartas/fire.png")),
+  new Card("Esqueleto", 1, CARD_TYPE.TROOP, Assets.image("/Cartas/esqueleto.png"))
 ]
 const playerDeck = Assets.image("deck.png");
 
 const playerTowers = [
-  new Torre({
+  new Tower({
     x: 226,
     y: 230,
-    vida: 1792,
-    tipo: TOWER_TYPE.PRINCIPE,
+    life: 1792,
+    type: TOWER_TYPE.PRINCE,
     img: "/Torres/blue_princess.png"
   }),
 
-  new Torre({
+  new Tower({
     x: 370,
     y: 230,
-    vida: 1792,
-    tipo: TOWER_TYPE.PRINCIPE,
+    life: 1792,
+    type: TOWER_TYPE.PRINCE,
     img: "/Torres/blue_princess.png"
   }),
 
-  new Torre({
+  new Tower({
     x: 290,
     y: 260,
-    vida: 3000,
-    tipo: TOWER_TYPE.REI,
+    life: 3000,
+    type: TOWER_TYPE.KING,
     img: "/Torres/Blue_king.png"
 
   })
@@ -43,30 +43,30 @@ const playerTowers = [
 
 const enemyTowers = [
 
-  new Torre({
+  new Tower({
 
     x: 220,
     y: 70,
-    vida: 1792,
-    tipo: TOWER_TYPE.PRINCIPE,
+    life: 1792,
+    type: TOWER_TYPE.PRINCE,
     img: "/Torres/red_princess.png"
 
   }),
 
-    new Torre({
+    new Tower({
       x: 369, 
       y: 70,
-      vida: 1792,
-      tipo: TOWER_TYPE.PRINCIPE,
+      life: 1792,
+      type: TOWER_TYPE.PRINCE,
       img: "/Torres/red_princess.png"
 
   }),
 
-    new Torre({
+    new Tower({
       x: 291.5,
       y: 20,
-      vida: 3000,
-      tipo: TOWER_TYPE.REI,
+      life: 3000,
+      type: TOWER_TYPE.KING,
       img: "/Torres/Red_king.png"
 
   })

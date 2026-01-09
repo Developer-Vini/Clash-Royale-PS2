@@ -3,14 +3,14 @@ const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Screen.getMode();
 const PLAYER_ONE_PORT = 0;
 
 const CARD_TYPE = {
-    FEITICO: "feitico",
-    TROPA: "tropa",
-    EDIFICIO: "edificio"
+    SPELL: "spell",
+    TROOP: "troop",
+    BUILDING: "building"
 };
 
 const TOWER_TYPE = {
-    PRINCIPE: "principe",
-    REI: "rei"
+    PRINCE: "prince",
+    KING: "king"
 };
 
 export {
