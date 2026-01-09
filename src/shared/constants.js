@@ -1,18 +1,22 @@
-const PORTA_PLAYER_UM = 0;
+const {width: SCREEN_WIDTH, height: SCREEN_HEIGHT} = Screen.getMode();
 
-const TIPO_CARTA = {
-    FEITICO: "feitico",
-    TROPA: "tropa",
-    EDIFICIO: "edificio"
+const PLAYER_ONE_PORT = 0;
+
+const CARD_TYPE = {
+    SPELL: "spell",
+    TROOP: "troop",
+    BUILDING: "building"
 };
 
-const TIPO_TORRE = {
-    PRINCIPE: "principe",
-    REI: "rei"
+const TOWER_TYPE = {
+    PRINCE: "prince",
+    KING: "king"
 };
 
 export {
-    PORTA_PLAYER_UM,
-    TIPO_CARTA,
-    TIPO_TORRE
+    PLAYER_ONE_PORT,
+    CARD_TYPE,
+    TOWER_TYPE,
+    SCREEN_WIDTH,
+    SCREEN_HEIGHT
 }

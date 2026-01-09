@@ -1,90 +1,90 @@
-import { Carta } from "./src/carta.js";
-import { Torre } from "./src/torre.js";
+import Card from "./src/card.js";
+import Tower from "./src/tower.js";
 import Gamepad from "./src/shared/gamepad.js";
-import { TIPO_CARTA, TIPO_TORRE } from "./src/shared/constants.js";
+import { CARD_TYPE, TOWER_TYPE } from "./src/shared/constants.js";
 import Assets from "./src/shared/assets.js";
 
 Screen.setParam(Screen.DEPTH_TEST_ENABLE, false);
 
-const fundo = Assets.image("background.png");
+const background = Assets.image("background.png");
 
-const cartas = [
-  new Carta("Fire", 4, TIPO_CARTA.FEITICO, Assets.image("/Cartas/fire.png")),
-  new Carta("Esqueleto", 1, TIPO_CARTA.TROPA, Assets.image("/Cartas/esqueleto.png"))
+const cards = [
+  new Card("Fire", 4, CARD_TYPE.SPELL, Assets.image("/Cartas/fire.png")),
+  new Card("Esqueleto", 1, CARD_TYPE.TROOP, Assets.image("/Cartas/esqueleto.png"))
 ]
-const deckDoJogador = Assets.image("deck.png");
+const playerDeck = Assets.image("deck.png");
 
-const TorresPlayer = [
-  new Torre({
+const playerTowers = [
+  new Tower({
     x: 226,
     y: 230,
-    vida: 1792,
-    tipo: TIPO_TORRE.PRINCIPE,
+    life: 1792,
+    type: TOWER_TYPE.PRINCE,
     img: "/Torres/blue_princess.png"
   }),
 
-  new Torre({
+  new Tower({
     x: 370,
     y: 230,
-    vida: 1792,
-    tipo: TIPO_TORRE.PRINCIPE,
+    life: 1792,
+    type: TOWER_TYPE.PRINCE,
     img: "/Torres/blue_princess.png"
   }),
 
-  new Torre({
+  new Tower({
     x: 290,
     y: 260,
-    vida: 3000,
-    tipo: TIPO_TORRE.REI,
+    life: 3000,
+    type: TOWER_TYPE.KING,
     img: "/Torres/Blue_king.png"
 
   })
 ]
-const TorresInimiga = [
 
-  new Torre({
+const enemyTowers = [
+
+  new Tower({
 
     x: 220,
     y: 70,
-    vida: 1792,
-    tipo: TIPO_TORRE.PRINCIPE,
+    life: 1792,
+    type: TOWER_TYPE.PRINCE,
     img: "/Torres/red_princess.png"
 
   }),
 
-    new Torre({
+    new Tower({
       x: 369, 
       y: 70,
-      vida: 1792,
-      tipo: TIPO_TORRE.PRINCIPE,
+      life: 1792,
+      type: TOWER_TYPE.PRINCE,
       img: "/Torres/red_princess.png"
 
   }),
 
-    new Torre({
+    new Tower({
       x: 291.5,
       y: 20,
-      vida: 3000,
-      tipo: TIPO_TORRE.REI,
+      life: 3000,
+      type: TOWER_TYPE.KING,
       img: "/Torres/Red_king.png"
 
   })
-
-
 ]
 
 while (true) {
   Gamepad.update();
-
   Screen.clear();
-  fundo.draw(0, 0);
 
-  TorresPlayer.forEach(torre => {
+  background.draw(0, 0);
+
+  playerTowers.forEach(torre => {
     torre.draw();
   });
-  TorresInimiga.forEach(torre => {
+  enemyTowers.forEach(torre => {
     torre.draw();
   })
-  deckDoJogador.draw(198, 350);
+  playerDeck.draw(198, 350);
+
   Screen.flip();
 }
