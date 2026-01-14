@@ -1,4 +1,4 @@
-function animationHorizontalSprite(image) {
+function animationSprite(image) {
     const {
         totalFrames,
         fps = 12,
@@ -9,7 +9,8 @@ function animationHorizontalSprite(image) {
         startFrame = 0,
         endFrame = totalFrames - 1,
         facingLeft = false,
-        onAnimationEnd
+        onAnimationEnd,
+        framesPerRow
     } = image;
 
     if (image.currentFrame === undefined) image.currentFrame = startFrame;
@@ -50,18 +51,33 @@ function animationHorizontalSprite(image) {
     image.width = frameWidth * scale;
     image.height = frameHeight * scale;
     
+    const row = framesPerRow ? Math.floor(frameIndex / framesPerRow) : 0;
+    const col = framesPerRow ? frameIndex % framesPerRow : frameIndex;
+    
     if (facingLeft) {
-        image.startx = (frameIndex + 1) * frameWidth;
-        image.endx = frameIndex * frameWidth;
+        image.startx = (col + 1) * frameWidth;
+        image.endx = col * frameWidth;
     } else {
-        image.startx = frameIndex * frameWidth;
+        image.startx = col * frameWidth;
         image.endx = image.startx + frameWidth;
     }
     
-    image.starty = 0;
-    image.endy = frameHeight;
+    image.starty = row * frameHeight;
+    image.endy = image.starty + frameHeight;
 }
 
+function setAnimation(image, name, loop = true) {
+    const anim = image.animations[name];
+    if (!anim) return;
+    image.startFrame = anim.start;
+    image.endFrame = anim.end;
+    image.currentFrame = anim.start;
+    image.loop = loop;
+    image.frameTimer = 0;
+}
+
+
 export {
-    animationHorizontalSprite
+    animationSprite,
+    setAnimation
 }

@@ -1,45 +1,54 @@
 import Assets from './src/shared/assets.js';
-import { animationHorizontalSprite } from './src/animation.js';
-import { SCREEN_HEIGHT, SCREEN_WIDTH } from './src/shared/constants.js';
+import { animationSprite, setAnimation } from './src/shared/animation.js';
+import { PLAYER_ONE_PORT, SCREEN_HEIGHT, SCREEN_WIDTH } from './src/shared/constants.js';
+import Gamepad from './src/shared/gamepad.js';
 
 Screen.setParam(Screen.DEPTH_TEST_ENABLE, false);
 
-const globin = Assets.image('personagens/goblin/globin_walk.png', {
-    totalFrames: 8,
+const wizard = Assets.image('/characters/wizard/blue/blue_wizard_move.png', {
+    framesPerRow: 8,
     frameWidth: 20,
-    frameHeight: 24,
-    fps: 12,
+    frameHeight: 21,
+    fps: 8,
     loop: true,
+    animations: {
+        one: { start: 0, end: 7 },
+        two: { start: 8, end: 15 },
+        three: { start: 16, end: 23 },
+        four: { start: 24, end: 31 },
+        five: { start: 32, end: 39 },
+        six: { start: 40, end: 47 },
+        seven: { start: 48, end: 55 },
+        eight: { start: 56, end: 63 },
+        nine: { start: 64, end: 71 },
+    }
 });
 
-<<<<<<< HEAD
-const arqueira = Assets.image('personagens/arqueira/0.png', {
-
-    totalFrames: 7,
-    frameWidth: 20,
-    frameHeight: 24, 
-    fps: 12,
-    loop:true
-
-})
-
-=======
->>>>>>> c4f175c6c2b41c19f11b8aeb988afa6c3592a978
 const background = Assets.image("background.png");
+
+const animationNames = Object.keys(wizard.animations);
+let currentAnimationIndex = 0;
+let xWasPressed = false;
+
+setAnimation(wizard, animationNames[currentAnimationIndex]);
 
 while (true) {
     Screen.clear();
+    Gamepad.update();
+
+    const xIsPressed = Gamepad.player(PLAYER_ONE_PORT).pressed(Pads.CROSS);
+
+    if (xIsPressed && !xWasPressed) {
+        currentAnimationIndex = (currentAnimationIndex + 1) % animationNames.length;
+        const nextAnimation = animationNames[currentAnimationIndex];
+        setAnimation(wizard, nextAnimation);
+    }
+    xWasPressed = xIsPressed;
+
     background.draw(0, 0);
 
-<<<<<<< HEAD
-    //animationHorizontalSprite(globin);
-    animationHorizontalSprite(arqueira);
-    arqueira.draw(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-    //globin.draw(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
-=======
-    animationHorizontalSprite(globin);
-    globin.draw(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
->>>>>>> c4f175c6c2b41c19f11b8aeb988afa6c3592a978
+    animationSprite(wizard);
+    wizard.draw(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 
     Screen.flip();
 }
