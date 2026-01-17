@@ -2,6 +2,7 @@ import Assets from './src/shared/assets.js';
 import { animationSprite, setAnimation } from './src/shared/animation.js';
 import { PLAYER_ONE_PORT, SCREEN_HEIGHT, SCREEN_WIDTH } from './src/shared/constants.js';
 import Gamepad from './src/shared/gamepad.js';
+let direction = 1;
 
 Screen.setParam(Screen.DEPTH_TEST_ENABLE, false);
 
@@ -42,12 +43,14 @@ while (true) {
         currentAnimationIndex = (currentAnimationIndex + 1) % animationNames.length;
         const nextAnimation = animationNames[currentAnimationIndex];
         setAnimation(wizard, nextAnimation);
+        direction *= 1;
     }
     xWasPressed = xIsPressed;
 
     background.draw(0, 0);
 
     animationSprite(wizard);
+    wizard.scaleX = direction;
     wizard.draw(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2);
 
     Screen.flip();
