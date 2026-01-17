@@ -160,6 +160,25 @@ function controlOfTheLetter(Gamepad){
     selectedCardIndex = (selectedCardIndex + 1) % hand.length;
     
   }
+
+  if (Gamepad.player(PLAYER_ONE_PORT).justPressed(Pads.CROSS)) {
+    const selectedCard = hand[selectedCardIndex];
+
+    if (barElixir >= selectedCard.cost) {
+
+      barElixir -= selectedCard.cost;
+
+      hand.splice(selectedCardIndex, 1);
+
+      const newCardIndex = Math.floor(Math.random() * deck.length);
+      const newCard = deck[newCardIndex];
+      hand.push(newCard);
+
+      selectedCardIndex = Math.min(selectedCardIndex, hand.length - 1);
+    } else {
+      console.log("Elixir insuficiente!");
+    }
+  }
   
 }
 
